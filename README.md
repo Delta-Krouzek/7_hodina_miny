@@ -1,2 +1,2 @@
 # 7. hodina - Miny
-[Video záznam]()
+[Video záznam](https://youtu.be/yKBvuoov36Y)
