@@ -20,6 +20,10 @@ namespace krouzek_programovani_miny
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public static int width = 5, height = 5, mines = 5;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,12 +31,24 @@ namespace krouzek_programovani_miny
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
+            if (width * height >= mines)
+            {
+                
+            }
+            else
+            {
+                slider3.Value = width * height;
+            }
         }
 
         private void slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            if (label1 == null)
+            {
+                return;
+            }
+            width = Convert.ToInt32(slider1.Value);
+            label1.Content = width;
         }
 
         private void slider2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
