@@ -22,6 +22,7 @@ namespace krouzek_programovani_miny
     {
 
         public static int width = 5, height = 5, mines = 5;
+        Game hra;
 
 
         public MainWindow()
@@ -33,12 +34,20 @@ namespace krouzek_programovani_miny
         {
             if (width * height >= mines)
             {
-                
+                hra = new Game();
+                hra.Closing += Hra_Closing;
+                hra.Show();
+                IsEnabled = false;
             }
             else
             {
                 slider3.Value = width * height;
             }
+        }
+
+        private void Hra_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            IsEnabled = true;
         }
 
         private void slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -53,12 +62,22 @@ namespace krouzek_programovani_miny
 
         private void slider2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            if (label2 == null)
+            {
+                return;
+            }
+            height = Convert.ToInt32(slider2.Value);
+            label2.Content = height;
         }
 
         private void slider3_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            if (label3 == null)
+            {
+                return;
+            }
+            mines = Convert.ToInt32(slider3.Value);
+            label3.Content = mines;
         }
     }
 }
