@@ -1,3 +1,4 @@
 # 7. hodina - Miny
 [Video záznam #1](https://youtu.be/yKBvuoov36Y)  
-[Video záznam #2](https://youtu.be/rdTlCEqIhrg)
+[Video záznam #2](https://youtu.be/rdTlCEqIhrg)  
+[Video záznam #3](https://youtu.be/FG_cBa2LiOo)  
