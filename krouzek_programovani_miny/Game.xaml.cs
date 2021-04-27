@@ -93,7 +93,30 @@ namespace krouzek_programovani_miny
 
         private void Rec_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            Rectangle rec = (Rectangle)sender;
+            int x = Convert.ToInt32(rec.GetValue(Grid.RowProperty));
+            int y = Convert.ToInt32(rec.GetValue(Grid.ColumnProperty));
+
+            if (pole[y, x] == 1 && Convert.ToString(rec.Fill) == "#FF646464")
+            {
+                najito++;
+                naklikl++;
+                rec.Fill = new SolidColorBrush(Color.FromRgb(255, 0, 255));
+            }
+            else if (!(Convert.ToString(rec.Fill) == "#FFFF00FF"))
+            {
+                naklikl++;
+                rec.Fill = new SolidColorBrush(Color.FromRgb(255, 0, 255));
+            }
+
+            if (naklikl == pocetMin && pocetMin == najito)
+            {
+                vyhra = new Win();
+                //IsEnabled = false;
+                casovac.Start();
+                vyhra.ShowDialog();
+            }
+            Nadpis();
         }
 
         private void Rec_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -126,6 +149,45 @@ namespace krouzek_programovani_miny
                 casovac.Start();
                 prohra.ShowDialog();
             }
+            else
+            {
+                int soucet = 0;
+                for (int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        if (i != 0 || j != 0)
+                        {
+                            int mezi;
+                            if (x + i != -1 && y + j != -1 && x + i != vyska && y + j != sirka)
+                            {
+                                mezi = pole[y + j, x + i];
+                            }
+                            else
+                            {
+                                mezi = 0;
+                            }
+                            soucet += mezi;
+                        }
+                    }
+                }
+
+                if (soucet >= 1)
+                {
+                    rec.Fill = new SolidColorBrush(Color.FromRgb(0, 0, 255));
+                    Label cislo = new Label();
+                    cislo.FontSize = 24;
+                    cislo.Content = soucet;
+                    cislo.SetValue(Grid.RowProperty, x);
+                    cislo.SetValue(Grid.ColumnProperty, y);
+                    Mrizka.Children.Add(cislo);
+                }
+                else
+                {
+                    rec.Fill = new SolidColorBrush(Color.FromRgb(0, 255, 00));
+                }
+            }
+            Nadpis();
         }
 
         private void Casovac_Tick(object sender, EventArgs e)
@@ -139,6 +201,11 @@ namespace krouzek_programovani_miny
             {
                 prohra.Close();
             }
+        }
+        
+        private void Nadpis()
+        {
+            Title = "Najito min " + naklikl + "/" + pocetMin;
         }
     }
 }
